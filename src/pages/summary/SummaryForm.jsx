@@ -1,13 +1,28 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 const SummaryForm = () => {
   const [tcChecked, setTcChecked] = useState(false);
 
+  const popover = (
+    <Popover id="termsandconditions-popover">
+      <Popover.Body>아이스크림은 주문 되지 않습니다.</Popover.Body>
+    </Popover>
+  );
+
   const checkboxLabel = (
     <span>
-      I agree to <span style={{ color: "blue" }}>이용약관</span>
+      <OverlayTrigger
+        placement="right"
+        overlay={popover}
+        trigger={["hover", "focus"]}
+      >
+        <span style={{ color: "blue" }}>이용약관</span>
+      </OverlayTrigger>
+      에 동의 합니다.
     </span>
   );
 
