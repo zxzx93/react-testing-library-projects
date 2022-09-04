@@ -9,9 +9,19 @@ export const handlers = [
           imagePath: "/images/chocolate.png",
         },
         {
-          name: "Vanila",
+          name: "Vanilla",
           imagePath: "/images/vanila.png",
         },
+      ])
+    );
+  }),
+
+  rest.get("http://localhost:3030/toppings", (rea, res, ctx) => {
+    return res(
+      ctx.json([
+        { name: "Cherries", imagePath: "/images/Cherries.png" },
+        { name: "M&Ms", imagePath: "/images/m-and-ms.png" },
+        { name: "Hot fudge", imagePath: "/images/hot-fudge.png" },
       ])
     );
   }),
