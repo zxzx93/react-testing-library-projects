@@ -1,25 +1,17 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import Container from "react-bootstrap/Container";
+import OrderEntry from "./pages/entry/OrderEntry";
+import { OrderDetailsProvider } from "./contexts/OrderDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <OrderDetailsProvider>
+        {/* summary , entry page는 provider가 필요함. */}
+        <OrderEntry />
+      </OrderDetailsProvider>
+
+      {/* 주문 확인 페이지는 provider가 필요 없음. */}
+    </Container>
   );
 }
 
