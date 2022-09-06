@@ -7,21 +7,25 @@ import userEvent from "@testing-library/user-event";
 
 import SummaryForm from "../SummaryForm";
 
-test("초기에는 이용약관 체크박스가 체크가 안되어 있는지 확인, 주문하기 버튼이 비활성화 되어있어야 함", () => {
+test("Initial conditions", () => {
   render(<SummaryForm />);
 
-  const checkBox = screen.getByRole("checkbox", { name: /이용약관/i });
+  const checkBox = screen.getByRole("checkbox", {
+    name: /terms and conditions/i,
+  });
   expect(checkBox).not.toBeChecked();
 
-  const confirmButton = screen.getByRole("button", { name: /주문하기/i });
+  const confirmButton = screen.getByRole("button", { name: /confirm order/i });
   expect(confirmButton).toBeDisabled();
 });
 
-test("이용약관에 동의 체크하면 주문하기 버튼 활성화되고, 한번 더 체크박스 누르면 버튼 비활성화됨", () => {
+test("Checkbox enables button on first click and disables on second click", () => {
   render(<SummaryForm />);
 
-  const checkBox = screen.getByRole("checkbox", { name: /이용약관/i });
-  const confirmButton = screen.getByRole("button", { name: /주문하기/i });
+  const checkBox = screen.getByRole("checkbox", {
+    name: /terms and conditions/i,
+  });
+  const confirmButton = screen.getByRole("button", { name: /confirm order/i });
 
   userEvent.click(checkBox);
   expect(confirmButton).toBeEnabled(); //버튼 활성화
@@ -30,18 +34,20 @@ test("이용약관에 동의 체크하면 주문하기 버튼 활성화되고, �
   expect(confirmButton).toBeDisabled(); //버튼 비활성화
 });
 
-test("이용약관이 클릭 됐을때 팝오버", async () => {
+test("popover responds to hover", async () => {
   render(<SummaryForm />);
 
   //초기에는 팝오버가 hidden
-  const nullPopup = screen.queryByText(/아이스크림은 주문 되지 않습니다./i);
+  const nullPopup = screen.queryByText(
+    /no ice cream will actually be delivered/i
+  );
   expect(nullPopup).not.toBeInTheDocument();
 
   //체크박스 라벨에 마우스호버가 되면 팝오버 나타남
-  const termsAndConditions = screen.getByText(/이용약관/i);
+  const termsAndConditions = screen.getByText(/terms and conditions/i);
   userEvent.hover(termsAndConditions);
 
-  const popover = screen.getByText(/아이스크림은 주문 되지 않습니다./i);
+  const popover = screen.getByText(/no ice cream will actually be delivered/i);
   expect(popover).toBeInTheDocument();
 
   //다시 마우스호버가 아닐땐 팝오버 사라짐
@@ -60,6 +66,6 @@ test("이용약관이 클릭 됐을때 팝오버", async () => {
   */
   //MEMO 비동기 메서드 waitForElementToBeRemoved() : 요소가 존재하다가 비동기적으로 사라짐
   await waitForElementToBeRemoved(() =>
-    screen.queryByText(/아이스크림은 주문 되지 않습니다./i)
+    screen.queryByText(/no ice cream will actually be delivered/i)
   );
 });

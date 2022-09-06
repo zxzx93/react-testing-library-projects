@@ -3,7 +3,7 @@ import { render, screen } from "../../../test-utils/testing-library-utils";
 import Options from "../Options";
 
 //optionType="scoops"
-test("서버에서 반환한 옵션의 이미지가 있는지 확인", async () => {
+test("displays image for each scoop option from server", async () => {
   render(<Options optionType="scoops" />);
 
   //이미지 찾기
@@ -17,7 +17,7 @@ test("서버에서 반환한 옵션의 이미지가 있는지 확인", async () 
 });
 
 //optionType="toppings"
-test("서버에서 반환한 옵션의 이미지가 있는지 확인2", async () => {
+test("displays image for each toppings option from server", async () => {
   render(<Options optionType="toppings" />);
 
   const toppingImages = await screen.findAllByRole("img", {

@@ -9,20 +9,15 @@ const SummaryForm = () => {
 
   const popover = (
     <Popover id="termsandconditions-popover">
-      <Popover.Body>아이스크림은 주문 되지 않습니다.</Popover.Body>
+      <Popover.Body>No ice cream will actually be delivered</Popover.Body>
     </Popover>
   );
 
   const checkboxLabel = (
     <span>
-      <OverlayTrigger
-        placement="right"
-        overlay={popover}
-        trigger={["hover", "focus"]}
-      >
-        <span style={{ color: "blue" }}>이용약관</span>
+      <OverlayTrigger placement="right" overlay={popover}>
+        <span style={{ color: "blue" }}> Terms and Conditions</span>
       </OverlayTrigger>
-      에 동의 합니다.
     </span>
   );
 
@@ -37,7 +32,7 @@ const SummaryForm = () => {
         />
       </Form.Group>
       <Button variant="primary" type="submit" disabled={!tcChecked}>
-        주문하기
+        Confirm order
       </Button>
     </Form>
   );

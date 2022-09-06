@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 
-test("스쿱 수량을 바뀌면 스쿱 가격 토탈이 바뀜.", async () => {
+test("update scoop subtotal when scoops change", async () => {
   render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
   //초기 토탈 가격이 0원
