@@ -7,6 +7,8 @@ import ToppingOption from "./ToppingOption";
 import AlertBanner from "../common/AlertBanner";
 import { pricePerItem } from "../../constants/index";
 import { useOrderDetails } from "../../contexts/OrderDetails";
+import { formatCurrency } from "../../utilities";
+
 
 const Options = ({ optionType }) => {
   //optionType : scoops or toppings
@@ -25,14 +27,11 @@ const Options = ({ optionType }) => {
       )
       .then((res) => setItems(res.data))
       .catch((err) => {
-        // TODO : handle error res
         setError(true);
       });
   }, [optionType]);
 
-  if (error) {
-    <AlertBanner />;
-  }
+  if (error) return <AlertBanner />;
 
   const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
   const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
@@ -51,7 +50,7 @@ const Options = ({ optionType }) => {
   return (
     <>
       <h2>{title}</h2>
-      <p>{pricePerItem[optionType]}</p>
+      <p>{formatCurrency(pricePerItem[optionType])}</p>
       <p>
         {title} total: {orderDetails.totals[optionType]}
       </p>
