@@ -56,12 +56,20 @@ test("order phases for happy path", async () => {
   });
   userEvent.click(confirmOrderButton);
 
+  //로딩이 있는지 확인
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
   //확인 페이지에서 주문 번호 확인
   const thankYouHeader = await screen.findByRole("heading", {
     name: /Thank You!/i,
   });
   expect(thankYouHeader).toBeInTheDocument();
 
+  //로딩이 화면에서 사라졌는지 확인
+  const notLoading = screen.queryByText("loading");
+  expect(notLoading).not.toBeInTheDocument();
+  
   const orderNumber = await screen.findByText(/order number/i);
   expect(orderNumber).toBeInTheDocument();
 
