@@ -65,9 +65,13 @@ const OrderDetailsProvider = (props) => {
       setOptionCounts(newOptionCounts);
     };
 
+    const resetOrder = () => {
+      setOptionCounts({ scoops: new Map(), toppings: new Map() });
+    };
+
     //getter: 주문한 스쿱 및 토핑 옵션 세부사항 포함한 객체
     //setter: updateOptionCount
-    return [{ ...optionCounts, totals }, updateItemCount];
+    return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
   }, [optionCounts, totals]);
 
   return <OrderDetails.Provider {...props} value={value} />;
