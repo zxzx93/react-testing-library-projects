@@ -1,5 +1,10 @@
 {
-  "extends": ["plugin:testing-library/react", "react-app", "react-app/jest"],
+  "extends": [
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "react-app",
+    "react-app/jest"
+  ],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
